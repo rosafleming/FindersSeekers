@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-public class Home {
+public class Home extends AppCompatActivity{
 
     private Button seekersButton;
     private Button findersNewButton;
@@ -32,13 +32,11 @@ public class Home {
         findersOldButton = findViewById(R.id.findersOldButton);
         logoutButton = findViewById(R.id.logoutButton);
 
+/*
         seekersButton.setOnListener(v ->{
 
         });
+        */
     }
 
-    @Override
-    public View onCreateView(){
-
-    }
 }
