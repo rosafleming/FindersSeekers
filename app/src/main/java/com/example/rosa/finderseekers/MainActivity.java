@@ -71,11 +71,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        Button register = (Button) findViewById(R.id.signup);
+       /* Button register = (Button) findViewById(R.id.signup);
         register.setOnClickListener( v-> {
             Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
             startActivity (intent);
         });
+        */
 
 
 

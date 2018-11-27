@@ -2,6 +2,8 @@
     <string name="app_name">FinderSeekers</string>
     <string name="facebook_app_id">347284212501597</string>
     <string name="fb_login_protocol_scheme">fb347284212501597</string>
+    <string name="incorrect_email">Incorrect email</string>
+    <string name="email_required">Email is required</string>
 
 
     <string name="state_prompt">Choose a state</string>

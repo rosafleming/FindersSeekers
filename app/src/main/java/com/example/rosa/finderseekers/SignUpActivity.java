@@ -29,7 +29,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         EditText username = (EditText) findViewById(R.id.username);
         EditText password = (EditText) findViewById(R.id.password);
-        EditText verifyPasswd = (EditText) findViewById(R.id.password2);
+        //EditText verifyPasswd = (EditText) findViewById(R.id.password2);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,10 +48,10 @@ public class SignUpActivity extends AppCompatActivity {
                     return;
                 }
                 String passStr = password.getText().toString();
-                String verifyPassStr = verifyPasswd.getText().toString();
-                if (!verifyPassStr.equals(passStr)) {
-                    return;
-                }
+                //String verifyPassStr = verifyPasswd.getText().toString();
+                //if (!verifyPassStr.equals(passStr)) {
+                //    return;
+                //}
 
                 Snackbar.make(username, "Login verified",
                         Snackbar.LENGTH_LONG).show();
