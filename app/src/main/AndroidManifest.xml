@@ -32,7 +32,10 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
-        </activity>Copy Code
+        </activity>
+
+        <activity android:name=".SignUpActivity"/>
+        <activity android:name=".Home"/>
 
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>

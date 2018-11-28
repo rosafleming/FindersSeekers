@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             String passStr = password.getText().toString().toLowerCase();
-            if (!passStr.contains("traxy")) {
+            if (!passStr.contains("password")) {
                 return;
             }
             Snackbar.make(username, "Login verified",
@@ -71,14 +71,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-       /* Button register = (Button) findViewById(R.id.signup);
+        Button register = (Button) findViewById(R.id.signup);
         register.setOnClickListener( v-> {
             Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
             startActivity (intent);
         });
+
+
+
+
+        /*
+            Facebook login from here on
         */
-
-
 
 
         FacebookSdk.sdkInitialize(getApplicationContext());

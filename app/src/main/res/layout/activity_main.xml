@@ -68,11 +68,23 @@
         android:text="Login"
         android:textSize="18sp"
         android:visibility="visible" />
+
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/username"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="112dp"
         android:layout_marginBottom="30dp" />
+
+    <Button
+        android:id="@+id/signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="45dp"
+        android:text="Register" />
 </RelativeLayout>
