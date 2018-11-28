@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         logButton.setOnClickListener(v -> {
             String emailStr = username.getText().toString();
-            if (emailStr.length() == 0) {
+           /* if (emailStr.length() == 0) {
                 Snackbar.make(username, R.string.email_required,
                         Snackbar.LENGTH_LONG).show();
                 return;
@@ -61,10 +61,10 @@ public class MainActivity extends AppCompatActivity {
             String passStr = password.getText().toString().toLowerCase();
             if (!passStr.contains("password")) {
                 return;
-            }
+            }*/
             Snackbar.make(username, "Login verified",
                     Snackbar.LENGTH_LONG).show();
-            Intent intent = new Intent(MainActivity.this, Home.class);
+            Intent intent = new Intent(MainActivity.this, SeekersActivity.class);
             intent.putExtra("email",emailStr);
             startActivity (intent);
             finish();
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-                        Intent intent = new Intent(MainActivity.this, Home.class);
+                        Intent intent = new Intent(MainActivity.this, SeekersActivity.class);
                         //intent.putExtra("email",EMAIL);
                         startActivity (intent);
                         finish();
