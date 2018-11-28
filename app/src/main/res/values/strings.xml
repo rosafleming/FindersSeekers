@@ -68,4 +68,11 @@
         <item>Flint</item>
         <item>City not in MI</item>
     </string-array>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_finders">FindersActivity</string>
+    <string name="title_activity_base">BaseActivity</string>
+    <string name="title_activity_seekers">SeekersActivity</string>
 </resources>
