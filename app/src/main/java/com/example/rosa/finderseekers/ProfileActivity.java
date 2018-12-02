@@ -8,9 +8,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import org.w3c.dom.Text;
 
 public class ProfileActivity extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
+    DatabaseReference topRef;
 
 
     @Override
@@ -22,12 +29,13 @@ public class ProfileActivity extends AppCompatActivity {
         TextView FindersNum = (TextView) findViewById(R.id.FindersNum);
         Button logoutButton = (Button) findViewById(R.id.logout);
 
+        mAuth = FirebaseAuth.getInstance();
 
         logoutButton.setOnClickListener( v-> {
             Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
             startActivity (intent);
         });
-
+        topRef = FirebaseDatabase.getInstance().getReference("Test");
 
 
     }
