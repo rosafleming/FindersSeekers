@@ -9,21 +9,23 @@
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="25dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profTitle"
         app:srcCompat="@drawable/com_facebook_profile_picture_blank_portrait" />
 
     <Button
         android:id="@+id/logout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="160dp"
         android:text="Logout"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -31,42 +33,66 @@
         android:id="@+id/nameId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:text="Profile Users Name"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <TextView
         android:id="@+id/SeekersNum"
-        android:layout_width="147dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="SeekersNum"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameId" />
+        android:textSize="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/emailSpot"
+        tools:layout_editor_absoluteX="295dp" />
 
     <TextView
         android:id="@+id/SeekersAmount"
-        android:layout_width="213dp"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="You have Seeked"
+        android:layout_marginEnd="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Number of Places Seeked:"
+        android:textSize="16dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/SeekersNum"
+        app:layout_constraintHorizontal_bias="0.882"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailSpot" />
+
+    <TextView
+        android:id="@+id/emailSpot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="25dp"
+        android:text="Email:"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/SeekersNum"
+        app:layout_constraintHorizontal_bias="0.255"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameId" />
 
     <TextView
         android:id="@+id/FindersAmount"
-        android:layout_width="wrap_content"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Number of locations found"
+        android:layout_marginTop="16dp"
+        android:text="Number of locations found:"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/FindersNum"
+        app:layout_constraintHorizontal_bias="0.894"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SeekersAmount" />
 
@@ -74,11 +100,34 @@
         android:id="@+id/FindersNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginTop="16dp"
         android:text="FindersNum"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/FindersAmount"
-        app:layout_constraintTop_toBottomOf="@+id/SeekersAmount" />
+        app:layout_constraintTop_toBottomOf="@+id/SeekersNum" />
+
+    <TextView
+        android:id="@+id/profTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Profile"
+        android:textSize="34sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/emailAddr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="emailAddr"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@+id/emailSpot"
+        tools:layout_editor_absoluteY="390dp" />
+
+
 </android.support.constraint.ConstraintLayout>
