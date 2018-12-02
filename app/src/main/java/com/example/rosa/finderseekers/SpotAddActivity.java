@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,9 @@ public class SpotAddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_spot_add);
         //Log.i("Clicked","Finders Open");
+        city = (Spinner) findViewById(R.id.city_spinner);
 
         addItemsOnSpinner2();
         addListenerOnButton();
@@ -42,14 +45,17 @@ public class SpotAddActivity extends AppCompatActivity {
     // add items into spinner dynamically
     public void addItemsOnSpinner2() {
 
-        city = (Spinner) findViewById(R.id.city_spinner);
-        List<String> list = new ArrayList<String>();
+        //city = (Spinner) findViewById(R.id.city_spinner);
+        ArrayList<String> list = new ArrayList<String>();
         list.add("Grand Rapids");
         list.add("Detroit");
         list.add("Flint");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(SpotAddActivity.this,
                 android.R.layout.simple_spinner_item, list);
+
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         city.setAdapter(dataAdapter);
     }
 

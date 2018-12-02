@@ -46,7 +46,7 @@
         <activity android:name=".SeekersActivity" />
         <activity android:name=".FindersActivity" />
         <activity android:name=".SpotAddActivity"></activity>
-        
+
 
     </application>
 
