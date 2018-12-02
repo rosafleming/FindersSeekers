@@ -21,7 +21,9 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 //https://developers.facebook.com/apps/347284212501597/fb-login/quickstart/
@@ -32,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     private static final Pattern EMAIL_REGEX = Pattern.compile(
             "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
             Pattern.CASE_INSENSITIVE);
+
+    private FirebaseAuth mAuth;
+    DatabaseReference topRef;
 
     //Use this with the button listener
     //LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
@@ -44,10 +49,11 @@ public class MainActivity extends AppCompatActivity {
         EditText password = (EditText) findViewById(R.id.password);
         Button logButton = (Button) findViewById(R.id.loginButton);
         //Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
-
+        mAuth = FirebaseAuth.getInstance();
 
         logButton.setOnClickListener(v -> {
             String emailStr = username.getText().toString();
+            String passStr = password.getText().toString();
            /* if (emailStr.length() == 0) {
                 Snackbar.make(username, R.string.email_required,
                         Snackbar.LENGTH_LONG).show();
@@ -62,12 +68,28 @@ public class MainActivity extends AppCompatActivity {
             if (!passStr.contains("password")) {
                 return;
             }*/
-            Snackbar.make(username, "Login verified",
+            /*Snackbar.make(username, "Login verified",
                     Snackbar.LENGTH_LONG).show();
             Intent intent = new Intent(MainActivity.this, SeekersActivity.class);
             intent.putExtra("email",emailStr);
             startActivity (intent);
-            finish();
+            finish();*/
+
+            mAuth.signInWithEmailAndPassword(emailStr,passStr)
+                    .addOnCompleteListener(this, task -> {
+                       if(task.isSuccessful()){
+                           Intent toMain = new Intent(this, SeekersActivity.class);
+                           toMain.putExtra("email", emailStr);
+                           startActivity(toMain);
+                           finish();
+                       }
+                       else{
+                           Snackbar.make(username, R.string.incorrect_email,Snackbar.LENGTH_LONG)
+                                   .show();
+                       }
+                    });
+            topRef = FirebaseDatabase.getInstance().getReference("Test");
+            topRef.push().setValue(emailStr);
         });
 
 
