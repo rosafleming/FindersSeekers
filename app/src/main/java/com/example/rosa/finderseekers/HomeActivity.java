@@ -1,5 +1,6 @@
 package com.example.rosa.finderseekers;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -10,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class HomeActivity extends BaseActivity {
 
     private Button seekersButton;
@@ -18,6 +21,7 @@ public class HomeActivity extends BaseActivity {
     private Button logoutButton;
 
     private EditText username;
+    private FirebaseAuth mAuth;
 
     @Override
     int getContentViewId() {
@@ -38,6 +42,15 @@ public class HomeActivity extends BaseActivity {
         findersNewButton = findViewById(R.id.findersNewButton);
         findersOldButton = findViewById(R.id.findersOldButton);
         logoutButton = findViewById(R.id.logoutButton);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        logoutButton.setOnClickListener( v-> {
+            mAuth.signOut();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity (intent);
+        });
+
     }
 
 }
