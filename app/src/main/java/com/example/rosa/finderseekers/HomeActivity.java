@@ -38,10 +38,6 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         Log.i("Clicked","Home Open");
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 24fd6f2e7a041a6a4e0b364b84d261f90aedee16
         logoutButton = findViewById(R.id.logoutButton);
 
         mAuth = FirebaseAuth.getInstance();
