@@ -39,12 +39,15 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".Home" />
+
         <activity android:name=".HomeActivity" />
         <activity android:name=".SeekersActivity" />
         <activity android:name=".FindersActivity" />
         <activity android:name=".SpotAddActivity"></activity>
+        
+
     </application>
 
 </manifest>
