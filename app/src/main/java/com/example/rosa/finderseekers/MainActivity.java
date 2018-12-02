@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Intent intent = new Intent(MainActivity.this, Home.class);
+                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                 intent.putExtra("email",EMAIL);
                 startActivity (intent);
                 finish();

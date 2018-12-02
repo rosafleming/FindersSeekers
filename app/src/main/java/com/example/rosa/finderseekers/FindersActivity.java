@@ -1,5 +1,6 @@
 package com.example.rosa.finderseekers;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -13,13 +14,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class FindersActivity extends BaseActivity {
 
-    private Spinner spinner1, spinner2;
-    private Button btnSubmit;
+
+    private Button post;
+
+    DatabaseReference topRef;
 
     @Override
     int getContentViewId() {
@@ -36,48 +42,22 @@ public class FindersActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         Log.i("Clicked","Finders Open");
 
-        addItemsOnSpinner2();
+
         addListenerOnButton();
-        addListenerOnSpinnerItemSelection();
 
-    }
-
-    // add items into spinner dynamically
-    public void addItemsOnSpinner2() {
-
-        spinner2 = (Spinner) findViewById(R.id.spinner2);
-        List<String> list = new ArrayList<String>();
-        list.add("Grand Rapids");
-        list.add("Detroit");
-        list.add("Flint");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner2.setAdapter(dataAdapter);
-    }
-
-    public void addListenerOnSpinnerItemSelection() {
-        spinner1 = (Spinner) findViewById(R.id.spinner1);
-        spinner1.setOnItemSelectedListener(new CustomOnItemSelectedListener());
     }
 
     // get the selected dropdown list value
     public void addListenerOnButton() {
 
-        spinner1 = (Spinner) findViewById(R.id.spinner1);
-        spinner2 = (Spinner) findViewById(R.id.spinner2);
-        btnSubmit = (Button) findViewById(R.id.btnSubmit);
+        post = (Button) findViewById(R.id.postbutton);
 
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
+        post.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
-                Toast.makeText(FindersActivity.this,
-                        "OnClickListener : " +
-                                "\nSpinner 1 : "+ String.valueOf(spinner1.getSelectedItem()) +
-                                "\nSpinner 2 : "+ String.valueOf(spinner2.getSelectedItem()),
-                        Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(FindersActivity.this, SpotAddActivity.class);
+                startActivity (intent);
             }
 
         });
