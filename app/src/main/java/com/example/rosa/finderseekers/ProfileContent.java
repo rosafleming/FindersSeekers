@@ -20,7 +20,6 @@ public class ProfileContent {
 
         public String _key;
 
-
         public ContentItem(){
             this.Name = "";
             this.Email = "";
@@ -30,13 +29,11 @@ public class ProfileContent {
 
 
         public ContentItem(String Name, String Email, String SeekersNum,
-                        String FindersNum, String sdirections, String susername) {
+                        String FindersNum) {
             this.Name = Name;
-            this.State = sstate;
-            this.City = scity;
-            this.Description = sdescription;
-            this.Directions = sdirections;
-            this.UserName = susername;
+            this.Email = Email;
+            this.SeekersNum = SeekersNum;
+            this.FindersNum = FindersNum;
         }
 
         @Override
