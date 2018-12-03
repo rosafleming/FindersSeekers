@@ -26,7 +26,8 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        EditText username = (EditText) findViewById(R.id.user_name);
+        EditText username = (EditText) findViewById(R.id.name);
+        EditText email = (EditText) findViewById(R.id.email);
         EditText password = (EditText) findViewById(R.id.password);
         EditText verifyPasswd = (EditText) findViewById(R.id.password2);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
