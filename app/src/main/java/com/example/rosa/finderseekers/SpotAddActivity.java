@@ -95,7 +95,7 @@ public class SpotAddActivity extends AppCompatActivity {
                        "gonzalezch74"
                );
 
-                topRef = FirebaseDatabase.getInstance().getReference("Places");
+                topRef = FirebaseDatabase.getInstance().getReference("Spots");
                 topRef.push().setValue(output);
 
                 Intent intent = new Intent(SpotAddActivity.this, FindersActivity.class);
