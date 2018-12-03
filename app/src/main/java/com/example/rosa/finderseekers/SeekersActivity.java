@@ -9,9 +9,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +46,64 @@ public class SeekersActivity extends BaseActivity {
         addItemsOnSpinner2();
         addListenerOnButton();
         addListenerOnSpinnerItemSelection();
+
+        DatabaseReference topRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference spots = topRef.child("Spots");
+
+
+        spots.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                SpotContent.ITEMS.clear();
+
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    SpotContent.SpotItem item = new SpotContent.SpotItem(
+                            ds.getValue(SpotContent.SpotItem.class).getName(),
+                            ds.getValue(SpotContent.SpotItem.class).getState(),
+                            ds.getValue(SpotContent.SpotItem.class).getCity(),
+                            ds.getValue(SpotContent.SpotItem.class).getDescription(),
+                            ds.getValue(SpotContent.SpotItem.class).getDirections(),
+                            ds.getValue(SpotContent.SpotItem.class).getUsername()
+                    );
+
+                    SpotContent.addItem(item);
+                }
+                String[] SpotList = new String[SpotContent.ITEMS.size()];
+
+                for (int i = 0; i < SpotContent.ITEMS.size(); i++){
+                    SpotList[i] = SpotContent.ITEMS.get(i).toString();
+                }
+
+                ArrayAdapter<String> itemsAdapter =
+                        new ArrayAdapter<String>(SeekersActivity.this, android.R.layout.simple_list_item_1,SpotList );
+
+
+                ListView listView = (ListView) findViewById(R.id.seekerSpotList);
+                listView.setAdapter(itemsAdapter);
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("FindData", "onCancelled", databaseError.toException());
+            }
+        });
+
+        /*String[] SpotList = new String[SpotContent.ITEMS.size()];
+
+        for (int i = 0; i < SpotContent.ITEMS.size(); i++){
+            SpotList[i] = SpotContent.ITEMS.get(i).toString();
+        }
+
+        ArrayAdapter<String> itemsAdapter =
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,SpotList );
+
+
+        ListView listView = (ListView) findViewById(R.id.spot_list);
+        listView.setAdapter(itemsAdapter);*/
+
     }
+
+
 
     // add items into spinner dynamically
     public void addItemsOnSpinner2() {
