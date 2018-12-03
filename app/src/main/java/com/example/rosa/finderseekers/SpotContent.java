@@ -13,12 +13,12 @@ public class SpotContent {
     }
 
     public static class SpotItem {
-        public final String Name;
-        public final String State;
-        public final String City;
-        public final String Description;
-        public final String Directions;
-        public final String UserName;
+        public final String name;
+        public final String state;
+        public final String city;
+        public final String description;
+        public final String directions;
+        public final String username;
 
         public String _key;
 
@@ -31,29 +31,60 @@ public class SpotContent {
     }*/
 
         public SpotItem(){
-            this.Name = "";
-            this.State = "";
-            this.City = "";
-            this.Description = "";
-            this.Directions = "";
-            this.UserName = "";
+            this.name = "";
+            this.state = "";
+            this.city = "";
+            this.description = "";
+            this.directions = "";
+            this.username = "";
         }
 
 
         public SpotItem(String sname, String sstate, String scity,
                            String sdescription, String sdirections, String susername) {
-            this.Name = sname;
-            this.State = sstate;
-            this.City = scity;
-            this.Description = sdescription;
-            this.Directions = sdirections;
-            this.UserName = susername;
+            this.name = sname;
+            this.state = sstate;
+            this.city = scity;
+            this.description = sdescription;
+            this.directions = sdirections;
+            this.username = susername;
         }
 
         @Override
         public String toString() {
-            return "";
+            return "Name: " + this.name +"\n"+
+                    "State: " + this.state +"\n"+
+                    "City: " + this.city +"\n"+
+                    "Description: " + this.description +"\n"+
+                    "Directions: " + this.directions +"\n"+
+                    "UserName: " + this.username +"\n";
             //this.fromVal + " " + this.fromUnits + " = " + this.toVal + " " + this.toUnits;
         }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getState() {
+            return state;
+        }
+
+        public String getCity() {
+            return city;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public String getDirections() {
+            return directions;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+
     }
 }

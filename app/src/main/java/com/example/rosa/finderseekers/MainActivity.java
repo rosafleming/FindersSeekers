@@ -3,8 +3,6 @@ package com.example.rosa.finderseekers;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import java.util.regex.Pattern;
 import android.support.design.widget.Snackbar;
@@ -45,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EditText username = (EditText) findViewById(R.id.username);
+        EditText username = (EditText) findViewById(R.id.user_name);
         EditText password = (EditText) findViewById(R.id.password);
         Button logButton = (Button) findViewById(R.id.loginButton);
         //Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
