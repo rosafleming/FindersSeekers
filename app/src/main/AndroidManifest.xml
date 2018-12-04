@@ -45,6 +45,7 @@
         <activity android:name=".HomeActivity" />
         <activity android:name=".SeekersActivity" />
         <activity android:name=".FindersActivity" />
+        <activity android:name=".ProfileActivity"/>
         <activity android:name=".SpotAddActivity"></activity>
 
 

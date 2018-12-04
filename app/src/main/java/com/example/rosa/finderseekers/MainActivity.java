@@ -3,6 +3,7 @@ package com.example.rosa.finderseekers;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import java.util.regex.Pattern;
 import android.support.design.widget.Snackbar;
@@ -28,7 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MainActivity extends AppCompatActivity {
 
     CallbackManager callbackManager = CallbackManager.Factory.create();
-    private static final String EMAIL = "email";
+    public static String EMAIL = "";
     private static final Pattern EMAIL_REGEX = Pattern.compile(
             "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
             Pattern.CASE_INSENSITIVE);
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         Button logButton = (Button) findViewById(R.id.loginButton);
         //Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
         mAuth = FirebaseAuth.getInstance();
+
 
         logButton.setOnClickListener(v -> {
             String emailStr = username.getText().toString();
@@ -76,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(emailStr,passStr)
                     .addOnCompleteListener(this, task -> {
                        if(task.isSuccessful()){
+                           EMAIL = emailStr;
                            Intent toMain = new Intent(this, SeekersActivity.class);
                            toMain.putExtra("email", emailStr);
                            startActivity(toMain);

@@ -15,16 +15,25 @@ import com.google.firebase.database.Query;
 
 import org.w3c.dom.Text;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends BaseActivity {
 
     private FirebaseAuth mAuth;
     DatabaseReference topRef;
+
+    @Override
+    int getContentViewId() {
+        return R.layout.activity_profile;
+    }
+
+    @Override
+    int getNavigationMenuItemId() {
+        return R.id.navigation_home;
+    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
 
 
         TextView profilename = (TextView) findViewById(R.id.nameId);

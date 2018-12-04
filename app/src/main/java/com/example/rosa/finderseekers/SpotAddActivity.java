@@ -92,7 +92,7 @@ public class SpotAddActivity extends AppCompatActivity {
                        String.valueOf(city.getSelectedItem()),
                        description.getText().toString(),
                        directions.getText().toString(),
-                       "gonzalezch74"
+                       MainActivity.EMAIL
                );
 
                 topRef = FirebaseDatabase.getInstance().getReference("Spots");

@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.regex.Pattern;
 
@@ -20,6 +22,7 @@ public class SignUpActivity extends AppCompatActivity {
             Pattern.CASE_INSENSITIVE);
 
     private FirebaseAuth mAuth;
+    DatabaseReference topRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 //        .setAction("Action", null).show();
-                String emailStr = username.getText().toString();
+                String emailStr = email.getText().toString();
                 /*if (emailStr.length() == 0) {
                     Snackbar.make(username, R.string.email_required,
                             Snackbar.LENGTH_LONG).show();
@@ -60,6 +63,16 @@ public class SignUpActivity extends AppCompatActivity {
                         .addOnCompleteListener(SignUpActivity.this, task -> {
                     if (task.isSuccessful()) {
                         Log.i("SignUp", "Worked");
+
+                        ProfileContent.ContentItem user = new ProfileContent.ContentItem(
+                             username.getText().toString(), emailStr, "0", "0"
+                        );
+                        ProfileContent.addItem(user);
+
+                        topRef = FirebaseDatabase.getInstance().getReference("Users");
+                        topRef.push().setValue(user);
+
+
                         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                         intent.putExtra("email", emailStr);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

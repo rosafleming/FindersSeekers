@@ -61,16 +61,18 @@ public class FindersActivity extends BaseActivity {
                 SpotContent.ITEMS.clear();
 
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    SpotContent.SpotItem item = new SpotContent.SpotItem(
-                            ds.getValue(SpotContent.SpotItem.class).getName(),
-                            ds.getValue(SpotContent.SpotItem.class).getState(),
-                            ds.getValue(SpotContent.SpotItem.class).getCity(),
-                            ds.getValue(SpotContent.SpotItem.class).getDescription(),
-                            ds.getValue(SpotContent.SpotItem.class).getDirections(),
-                            ds.getValue(SpotContent.SpotItem.class).getUsername()
-                    );
+                    if(ds.getValue(SpotContent.SpotItem.class).getUsername().equals(MainActivity.EMAIL)) {
+                        SpotContent.SpotItem item = new SpotContent.SpotItem(
+                                ds.getValue(SpotContent.SpotItem.class).getName(),
+                                ds.getValue(SpotContent.SpotItem.class).getState(),
+                                ds.getValue(SpotContent.SpotItem.class).getCity(),
+                                ds.getValue(SpotContent.SpotItem.class).getDescription(),
+                                ds.getValue(SpotContent.SpotItem.class).getDirections(),
+                                ds.getValue(SpotContent.SpotItem.class).getUsername()
+                        );
 
-                    SpotContent.addItem(item);
+                        SpotContent.addItem(item);
+                    }
                 }
                 String[] SpotList = new String[SpotContent.ITEMS.size()];
 

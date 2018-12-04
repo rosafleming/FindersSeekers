@@ -7,11 +7,11 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_width="82dp"
+        android:layout_height="140dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="25dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,10 +22,12 @@
         android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginEnd="160dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginBottom="8dp"
         android:text="Logout"
         android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/FindersAmount" />
 
@@ -123,11 +125,21 @@
         android:id="@+id/emailAddr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="8dp"
         android:text="emailAddr"
         android:textSize="16dp"
         app:layout_constraintStart_toEndOf="@+id/emailSpot"
-        tools:layout_editor_absoluteY="390dp" />
+        app:layout_constraintTop_toBottomOf="@+id/nameId" />
+
+    <include
+        android:id="@+id/navigation"
+        layout="@layout/activity_base"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

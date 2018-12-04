@@ -2,6 +2,7 @@ package com.example.rosa.finderseekers;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -41,7 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
             int itemId = item.getItemId();
             if (itemId == R.id.navigation_home) {
                 Log.i("Clicked","Opening Home");
-                startActivity(new Intent(this, HomeActivity.class));
+                startActivity(new Intent(this, ProfileActivity.class));
             } else if (itemId == R.id.navigation_dashboard) {
                 Log.i("Clicked","Opening Finders");
                 startActivity(new Intent(this, FindersActivity.class));

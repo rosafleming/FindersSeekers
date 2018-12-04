@@ -25,8 +25,9 @@ import java.util.List;
 
 public class SeekersActivity extends BaseActivity {
 
-    private Spinner spinner1, spinner2;
+    private Spinner state, city;
     private Button btnSubmit;
+    DatabaseReference topRef;
 
 
     @Override
@@ -42,12 +43,13 @@ public class SeekersActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i("Clicked","Seekers Open");
+        Log.i("USER", MainActivity.EMAIL);
 
         addItemsOnSpinner2();
         addListenerOnButton();
         addListenerOnSpinnerItemSelection();
 
-        DatabaseReference topRef = FirebaseDatabase.getInstance().getReference();
+        topRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference spots = topRef.child("Spots");
 
 
@@ -108,7 +110,7 @@ public class SeekersActivity extends BaseActivity {
     // add items into spinner dynamically
     public void addItemsOnSpinner2() {
 
-        spinner2 = (Spinner) findViewById(R.id.spinner2);
+        city = (Spinner) findViewById(R.id.spinner2);
         List<String> list = new ArrayList<String>();
         list.add("Grand Rapids");
         list.add("Detroit");
@@ -116,19 +118,19 @@ public class SeekersActivity extends BaseActivity {
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner2.setAdapter(dataAdapter);
+        city.setAdapter(dataAdapter);
     }
 
     public void addListenerOnSpinnerItemSelection() {
-        spinner1 = (Spinner) findViewById(R.id.spinner1);
-        spinner1.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+        state = (Spinner) findViewById(R.id.spinner1);
+        state.setOnItemSelectedListener(new CustomOnItemSelectedListener());
     }
 
     // get the selected dropdown list value
     public void addListenerOnButton() {
 
-        spinner1 = (Spinner) findViewById(R.id.spinner1);
-        spinner2 = (Spinner) findViewById(R.id.spinner2);
+        state = (Spinner) findViewById(R.id.spinner1);
+        city = (Spinner) findViewById(R.id.spinner2);
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -136,11 +138,48 @@ public class SeekersActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(SeekersActivity.this,
-                        "OnClickListener : " +
-                                "\nSpinner 1 : "+ String.valueOf(spinner1.getSelectedItem()) +
-                                "\nSpinner 2 : "+ String.valueOf(spinner2.getSelectedItem()),
-                        Toast.LENGTH_SHORT).show();
+                DatabaseReference newList = topRef.child("Spots");
+
+                newList.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        SpotContent.ITEMS.clear();
+
+                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                            if(ds.getValue(SpotContent.SpotItem.class).getState().equals(String.valueOf(state.getSelectedItem()))&& ds.getValue(SpotContent.SpotItem.class).getCity().equals(city.getSelectedItem()))
+                            {
+                                SpotContent.SpotItem item = new SpotContent.SpotItem(
+                                        ds.getValue(SpotContent.SpotItem.class).getName(),
+                                        ds.getValue(SpotContent.SpotItem.class).getState(),
+                                        ds.getValue(SpotContent.SpotItem.class).getCity(),
+                                        ds.getValue(SpotContent.SpotItem.class).getDescription(),
+                                        ds.getValue(SpotContent.SpotItem.class).getDirections(),
+                                        ds.getValue(SpotContent.SpotItem.class).getUsername()
+                                );
+
+                                SpotContent.addItem(item);
+                            }
+                        }
+                        String[] SpotList = new String[SpotContent.ITEMS.size()];
+
+                        for (int i = 0; i < SpotContent.ITEMS.size(); i++){
+                            SpotList[i] = SpotContent.ITEMS.get(i).toString();
+                        }
+
+                        ArrayAdapter<String> itemsAdapter =
+                                new ArrayAdapter<String>(SeekersActivity.this, android.R.layout.simple_list_item_1,SpotList );
+
+
+                        ListView listView = (ListView) findViewById(R.id.seekerSpotList);
+                        listView.setAdapter(itemsAdapter);
+
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.e("FindData", "onCancelled", databaseError.toException());
+                    }
+                });
+
             }
 
         });
