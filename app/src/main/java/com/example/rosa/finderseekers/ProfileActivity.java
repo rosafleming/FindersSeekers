@@ -4,14 +4,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.facebook.Profile;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
@@ -19,6 +25,7 @@ public class ProfileActivity extends BaseActivity {
 
     private FirebaseAuth mAuth;
     DatabaseReference topRef;
+    ProfileContent.ContentItem user;
 
     @Override
     int getContentViewId() {
@@ -39,7 +46,7 @@ public class ProfileActivity extends BaseActivity {
         TextView profilename = (TextView) findViewById(R.id.nameId);
         TextView SeekersNum = (TextView) findViewById(R.id.SeekersNum);
         TextView FindersNum = (TextView) findViewById(R.id.FindersNum);
-        TextView EmailSpot = (TextView) findViewById(R.id.emailSpot);
+        TextView email = (TextView) findViewById(R.id.emailAddr);
         Button logoutButton = (Button) findViewById(R.id.logout);
 
         mAuth = FirebaseAuth.getInstance();
@@ -49,20 +56,33 @@ public class ProfileActivity extends BaseActivity {
             startActivity (intent);
         });
 
-        topRef = FirebaseDatabase.getInstance().getReference("Test");
-        Query emailPulled = topRef.child("Email"); //.orderByChild("metrics/views")
-        //Query emailPulled = topRef.child("Email").equalTo(Username);
+        topRef = FirebaseDatabase.getInstance().getReference();
 
-        //EmailSpot = emailPulled.toString();
-        ProfileContent.ContentItem input = new ProfileContent.ContentItem(
-                profilename.getText().toString(),
-                EmailSpot.getText().toString(),
-                SeekersNum.getText().toString(),
-                FindersNum.getText().toString()
-        );
+        DatabaseReference userList = topRef.child("Users");
 
 
+        userList.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    if(ds.getValue(ProfileContent.ContentItem.class).getEmail().equals(MainActivity.EMAIL))
+                    {
+                        profilename.setText(ds.getValue(ProfileContent.ContentItem.class).getName());
+                        email.setText(ds.getValue(ProfileContent.ContentItem.class).getEmail());
+                        SeekersNum.setText(ds.getValue(ProfileContent.ContentItem.class).getSeekersNum());
+                        FindersNum.setText(ds.getValue(ProfileContent.ContentItem.class).getFindersNum());
+
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("FindData", "onCancelled", databaseError.toException());
+            }
+        });
 
     }
 }

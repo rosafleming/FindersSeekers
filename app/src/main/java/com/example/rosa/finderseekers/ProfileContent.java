@@ -13,33 +13,49 @@ public class ProfileContent {
     }
 
     public static class ContentItem {
-        public String Name;
-        public String Email;
-        public String SeekersNum;
-        public String FindersNum;
+        public String name;
+        public String email;
+        public String seekersNum;
+        public String findersNum;
 
         public String _key;
 
         public ContentItem(){
-            this.Name = "";
-            this.Email = "";
-            this.SeekersNum = "";
-            this.FindersNum = "";
+            this.name = "";
+            this.email = "";
+            this.seekersNum = "";
+            this.findersNum = "";
         }
 
 
-        public ContentItem(String Name, String Email, String SeekersNum,
-                        String FindersNum) {
-            this.Name = Name;
-            this.Email = Email;
-            this.SeekersNum = SeekersNum;
-            this.FindersNum = FindersNum;
+        public ContentItem(String name, String email, String seekersNum,
+                        String findersNum) {
+            this.name = name;
+            this.email = email;
+            this.seekersNum = seekersNum;
+            this.findersNum = findersNum;
         }
 
         @Override
         public String toString() {
             return "";
             //this.fromVal + " " + this.fromUnits + " = " + this.toVal + " " + this.toUnits;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public String getSeekersNum() {
+            return seekersNum;
+        }
+
+        public String getFindersNum() {
+            return findersNum;
         }
     }
 }

@@ -7,7 +7,7 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="82dp"
+        android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="25dp"
@@ -22,22 +22,21 @@
         android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="160dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="24dp"
         android:text="Logout"
         android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FindersAmount" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/nameId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="Profile Users Name"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,26 +46,24 @@
 
     <TextView
         android:id="@+id/SeekersNum"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="SeekersNum"
         android:textSize="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/emailSpot"
-        tools:layout_editor_absoluteX="295dp" />
+        app:layout_constraintStart_toEndOf="@+id/SeekersAmount"
+        app:layout_constraintTop_toBottomOf="@+id/emailAddr" />
 
     <TextView
         android:id="@+id/SeekersAmount"
-        android:layout_width="210dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="1dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="72dp"
         android:layout_marginTop="16dp"
-        android:text="Number of Places Seeked:"
+        android:text="Spots Seeked:"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/SeekersNum"
-        app:layout_constraintHorizontal_bias="0.882"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailSpot" />
 
@@ -74,27 +71,23 @@
         android:id="@+id/emailSpot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="1dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="24dp"
         android:text="Email:"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/SeekersNum"
-        app:layout_constraintHorizontal_bias="0.255"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameId" />
 
     <TextView
         android:id="@+id/FindersAmount"
-        android:layout_width="210dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
         android:layout_marginTop="16dp"
-        android:text="Number of locations found:"
+        android:text="Spots Found:"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/FindersNum"
-        app:layout_constraintHorizontal_bias="0.894"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SeekersAmount" />
 
@@ -102,11 +95,11 @@
         android:id="@+id/FindersNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="FindersNum"
         android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/FindersAmount"
         app:layout_constraintTop_toBottomOf="@+id/SeekersNum" />
 
     <TextView
@@ -125,8 +118,8 @@
         android:id="@+id/emailAddr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
         android:text="emailAddr"
         android:textSize="16dp"
         app:layout_constraintStart_toEndOf="@+id/emailSpot"
