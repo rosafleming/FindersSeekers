@@ -57,5 +57,13 @@ public class ProfileContent {
         public String getFindersNum() {
             return findersNum;
         }
+
+        public void setFindersNum(String findersNum) {
+            this.findersNum = findersNum;
+        }
+
+        public void setSeekersNum(String seekersNum) {
+            this.seekersNum = seekersNum;
+        }
     }
 }

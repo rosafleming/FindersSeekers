@@ -52,7 +52,6 @@ public class SeekersActivity extends BaseActivity {
         topRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference spots = topRef.child("Spots");
 
-
         spots.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

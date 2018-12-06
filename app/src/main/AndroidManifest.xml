@@ -41,11 +41,11 @@
         </activity>
 
         <activity android:name=".SignUpActivity" />
-
         <activity android:name=".HomeActivity" />
         <activity android:name=".SeekersActivity" />
         <activity android:name=".FindersActivity" />
         <activity android:name=".ProfileActivity"/>
+        <activity android:name=".CameraActivity"/>
         <activity android:name=".SpotAddActivity"></activity>
 
 
