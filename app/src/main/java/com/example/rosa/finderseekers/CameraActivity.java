@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.io.ByteArrayOutputStream;
+
 public class CameraActivity extends AppCompatActivity {
 
     ImageView imageView;
@@ -25,7 +27,7 @@ public class CameraActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,0);
+                startActivityForResult(intent,1888);
             }
         });
     }
@@ -35,5 +37,18 @@ public class CameraActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         Bitmap bitmap = (Bitmap)data.getExtras().get("data");
         imageView.setImageBitmap(bitmap);
+        Intent intent = new Intent();
+        intent.putExtra("bitmap", bitmap);
+        setResult(SignUpActivity.CAMERA_RESULT,intent);
+
+
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+
+        Intent in1 = new Intent(this, SignUpActivity.class);
+        in1.putExtra("bitmap",byteArray);
+        finish();
     }
 }

@@ -1,6 +1,9 @@
 package com.example.rosa.finderseekers;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -18,12 +22,15 @@ import java.util.regex.Pattern;
 
 public class SignUpActivity extends AppCompatActivity {
 
+    public static final int CAMERA_RESULT = 1888;
     private static final Pattern EMAIL_REGEX = Pattern.compile(
             "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
             Pattern.CASE_INSENSITIVE);
 
     private FirebaseAuth mAuth;
     DatabaseReference topRef;
+    ImageView profilePic;
+    Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +43,14 @@ public class SignUpActivity extends AppCompatActivity {
         EditText verifyPasswd = (EditText) findViewById(R.id.password2);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         Button imageUpload = (Button) findViewById(R.id.imageUpload);
+        ImageView profilePic = (ImageView) findViewById(R.id.profilePic);
 
         imageUpload.setOnClickListener( v-> {
             Intent intent = new Intent(SignUpActivity.this, CameraActivity.class);
             startActivity (intent);
         });
+
+
 
         mAuth = FirebaseAuth.getInstance();
         fab.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +106,15 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == CAMERA_RESULT) {
+            byte[] byteArray = getIntent().getByteArrayExtra("image");
+            Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+            profilePic.setImageBitmap(bitmap);
+        }
     }
 
 }
