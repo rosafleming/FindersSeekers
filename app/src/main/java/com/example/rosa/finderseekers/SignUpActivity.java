@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,6 +35,12 @@ public class SignUpActivity extends AppCompatActivity {
         EditText password = (EditText) findViewById(R.id.password);
         EditText verifyPasswd = (EditText) findViewById(R.id.password2);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        Button imageUpload = (Button) findViewById(R.id.imageUpload);
+
+        imageUpload.setOnClickListener( v-> {
+            Intent intent = new Intent(SignUpActivity.this, CameraActivity.class);
+            startActivity (intent);
+        });
 
         mAuth = FirebaseAuth.getInstance();
         fab.setOnClickListener(new View.OnClickListener() {
