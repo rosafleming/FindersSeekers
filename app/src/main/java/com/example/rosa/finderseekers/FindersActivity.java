@@ -32,6 +32,7 @@ public class FindersActivity extends BaseActivity {
 
     DatabaseReference topRef;
     DatabaseReference spots;
+    DatabaseReference users;
 
     @Override
     int getContentViewId() {
@@ -51,8 +52,8 @@ public class FindersActivity extends BaseActivity {
 
         addListenerOnButton();
 
-        DatabaseReference topRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference spots = topRef.child("Spots");
+        topRef = FirebaseDatabase.getInstance().getReference();
+        spots = topRef.child("Spots");
 
 
 
@@ -120,31 +121,18 @@ public class FindersActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                DatabaseReference users = topRef.child("Users");
+                users = topRef.child("Users");
                 users.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        SpotContent.ITEMS.clear();
 
                         for(DataSnapshot ds : dataSnapshot.getChildren()){
                             if(ds.getValue(ProfileContent.ContentItem.class).getEmail().equals(MainActivity.EMAIL)) {
                                 int finderCounter = Integer.parseInt(ds.getValue(ProfileContent.ContentItem.class).getFindersNum());
-                                finderCounter++;
-                                ds.getValue(ProfileContent.ContentItem.class).setFindersNum(Integer.toString(finderCounter));
+                                finderCounter=finderCounter+1;
+                                ds.getRef().child("findersNum").setValue(Integer.toString(finderCounter));
                             }
                         }
-                        String[] SpotList = new String[SpotContent.ITEMS.size()];
-
-                        for (int i = 0; i < SpotContent.ITEMS.size(); i++){
-                            SpotList[i] = SpotContent.ITEMS.get(i).toString();
-                        }
-
-                        ArrayAdapter<String> itemsAdapter =
-                                new ArrayAdapter<String>(FindersActivity.this, android.R.layout.simple_list_item_1,SpotList );
-
-
-                        ListView listView = (ListView) findViewById(R.id.spot_list);
-                        listView.setAdapter(itemsAdapter);
 
                     }
                     @Override

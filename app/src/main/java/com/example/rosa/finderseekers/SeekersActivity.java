@@ -1,5 +1,6 @@
 package com.example.rosa.finderseekers;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -28,6 +30,8 @@ public class SeekersActivity extends BaseActivity {
     private Spinner state, city;
     private Button btnSubmit;
     DatabaseReference topRef;
+    DatabaseReference users;
+    ListView listView;
 
 
     @Override
@@ -48,6 +52,7 @@ public class SeekersActivity extends BaseActivity {
         addItemsOnSpinner2();
         addListenerOnButton();
         addListenerOnSpinnerItemSelection();
+        listView = (ListView) findViewById(R.id.seekerSpotList);
 
         topRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference spots = topRef.child("Spots");
@@ -78,8 +83,6 @@ public class SeekersActivity extends BaseActivity {
                 ArrayAdapter<String> itemsAdapter =
                         new ArrayAdapter<String>(SeekersActivity.this, android.R.layout.simple_list_item_1,SpotList );
 
-
-                ListView listView = (ListView) findViewById(R.id.seekerSpotList);
                 listView.setAdapter(itemsAdapter);
 
             }
@@ -89,18 +92,34 @@ public class SeekersActivity extends BaseActivity {
             }
         });
 
-        /*String[] SpotList = new String[SpotContent.ITEMS.size()];
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                users = topRef.child("Users");
+                users.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
-        for (int i = 0; i < SpotContent.ITEMS.size(); i++){
-            SpotList[i] = SpotContent.ITEMS.get(i).toString();
-        }
+                        for(DataSnapshot ds : dataSnapshot.getChildren()){
+                            if(ds.getValue(ProfileContent.ContentItem.class).getEmail().equals(MainActivity.EMAIL)) {
+                                int seekerCounter = Integer.parseInt(ds.getValue(ProfileContent.ContentItem.class).getSeekersNum());
+                                seekerCounter=seekerCounter+1;
+                                ds.getRef().child("seekersNum").setValue(Integer.toString(seekerCounter));
+                            }
+                        }
 
-        ArrayAdapter<String> itemsAdapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,SpotList );
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.e("FindData", "onCancelled", databaseError.toException());
+                    }
+                });
 
+                Intent intent = new Intent(SeekersActivity.this, SpotSelected.class);
+                startActivity (intent);
+            }
+        });
 
-        ListView listView = (ListView) findViewById(R.id.spot_list);
-        listView.setAdapter(itemsAdapter);*/
 
     }
 
