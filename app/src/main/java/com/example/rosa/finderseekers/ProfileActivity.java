@@ -56,23 +56,23 @@ public class ProfileActivity extends BaseActivity {
             startActivity (intent);
         });
 
-        topRef = FirebaseDatabase.getInstance().getReference();
 
+        topRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference userList = topRef.child("Users");
 
-
+        Log.i("PROFILE", "Made It");
         userList.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                Log.i("PROFILE", "HERE");
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     if(ds.getValue(ProfileContent.ContentItem.class).getEmail().equals(MainActivity.EMAIL))
                     {
+                        Log.i("PROFILE", "HERE");
                         profilename.setText(ds.getValue(ProfileContent.ContentItem.class).getName());
                         email.setText(ds.getValue(ProfileContent.ContentItem.class).getEmail());
                         SeekersNum.setText(ds.getValue(ProfileContent.ContentItem.class).getSeekersNum());
                         FindersNum.setText(ds.getValue(ProfileContent.ContentItem.class).getFindersNum());
-
                         break;
                     }
                 }

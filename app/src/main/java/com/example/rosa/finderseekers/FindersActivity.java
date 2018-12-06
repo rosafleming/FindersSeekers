@@ -55,6 +55,7 @@ public class FindersActivity extends BaseActivity {
         DatabaseReference spots = topRef.child("Spots");
 
 
+
         spots.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -118,6 +119,40 @@ public class FindersActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
+
+                DatabaseReference users = topRef.child("Users");
+                users.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        SpotContent.ITEMS.clear();
+
+                        for(DataSnapshot ds : dataSnapshot.getChildren()){
+                            if(ds.getValue(ProfileContent.ContentItem.class).getEmail().equals(MainActivity.EMAIL)) {
+                                int finderCounter = Integer.parseInt(ds.getValue(ProfileContent.ContentItem.class).getFindersNum());
+                                finderCounter++;
+                                ds.getValue(ProfileContent.ContentItem.class).setFindersNum(Integer.toString(finderCounter));
+                            }
+                        }
+                        String[] SpotList = new String[SpotContent.ITEMS.size()];
+
+                        for (int i = 0; i < SpotContent.ITEMS.size(); i++){
+                            SpotList[i] = SpotContent.ITEMS.get(i).toString();
+                        }
+
+                        ArrayAdapter<String> itemsAdapter =
+                                new ArrayAdapter<String>(FindersActivity.this, android.R.layout.simple_list_item_1,SpotList );
+
+
+                        ListView listView = (ListView) findViewById(R.id.spot_list);
+                        listView.setAdapter(itemsAdapter);
+
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.e("FindData", "onCancelled", databaseError.toException());
+                    }
+                });
+
                 Intent intent = new Intent(FindersActivity.this, SpotAddActivity.class);
                 startActivity (intent);
             }
