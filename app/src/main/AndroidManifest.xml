@@ -45,7 +45,6 @@
         <activity android:name=".SeekersActivity" />
         <activity android:name=".FindersActivity" />
         <activity android:name=".ProfileActivity"/>
-        <activity android:name=".CameraActivity"/>
         <activity android:name=".SpotSelected"/>
         <activity android:name=".SpotAddActivity"></activity>
 
