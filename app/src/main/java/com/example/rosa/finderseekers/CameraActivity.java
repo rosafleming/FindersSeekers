@@ -34,31 +34,19 @@ public class CameraActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        /*
-        super.onActivityResult(requestCode, resultCode, data);
-        Bitmap bitmap = (Bitmap)data.getExtras().get("data");
-        imageView.setImageBitmap(bitmap);
-        */
-        /*
-        Intent intent = new Intent();
-        intent.putExtra("bitmap", bitmap);
-        setResult(SignUpActivity.CAMERA_RESULT,intent);
-        */
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            imageView.setImageBitmap(imageBitmap);
+            //imageView.setImageBitmap(imageBitmap);
+
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+
+            Intent in1 = new Intent(CameraActivity.this, SignUpActivity.class);
+            in1.putExtra("bitmap",byteArray);
+            finish();
         }
-
-        /*
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-
-        Intent in1 = new Intent(CameraActivity.this, SignUpActivity.class);
-        in1.putExtra("bitmap",byteArray);
-        finish();
-        */
     }
 
     private void dispatchTakePictureIntent() {
