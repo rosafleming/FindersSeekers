@@ -37,9 +37,11 @@ public class CameraActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         Bitmap bitmap = (Bitmap)data.getExtras().get("data");
         imageView.setImageBitmap(bitmap);
+        /*
         Intent intent = new Intent();
         intent.putExtra("bitmap", bitmap);
         setResult(SignUpActivity.CAMERA_RESULT,intent);
+        */
 
 
 
@@ -47,7 +49,7 @@ public class CameraActivity extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byteArray = stream.toByteArray();
 
-        Intent in1 = new Intent(this, SignUpActivity.class);
+        Intent in1 = new Intent(CameraActivity.this, SignUpActivity.class);
         in1.putExtra("bitmap",byteArray);
         finish();
     }

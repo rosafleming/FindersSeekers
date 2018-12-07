@@ -111,7 +111,7 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == CAMERA_RESULT) {
-            byte[] byteArray = getIntent().getByteArrayExtra("image");
+            byte[] byteArray = getIntent().getByteArrayExtra("bitmap");
             Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
             profilePic.setImageBitmap(bitmap);
         }
