@@ -34,33 +34,53 @@
 
     <TextView
         android:id="@+id/spotState"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="42dp"
         android:text="State"
-        tools:layout_editor_absoluteX="57dp"
-        tools:layout_editor_absoluteY="263dp" />
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spotTitle" />
 
     <TextView
         android:id="@+id/spotCity"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="City"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="318dp" />
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spotState" />
 
     <TextView
         android:id="@+id/spotDesc"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Description"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="358dp" />
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spotCity" />
 
     <TextView
         android:id="@+id/spotDirec"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Directions"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="413dp" />
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spotDesc" />
 </android.support.constraint.ConstraintLayout>
