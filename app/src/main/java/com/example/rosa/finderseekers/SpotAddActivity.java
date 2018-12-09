@@ -21,11 +21,12 @@ import java.util.List;
 
 public class SpotAddActivity extends AppCompatActivity {
 
-    private Spinner state, city;
+    private Spinner state;
     private Button post;
     private EditText name;
     private EditText description;
     private EditText directions;
+    private EditText city;
 
     DatabaseReference topRef;
 
@@ -34,16 +35,16 @@ public class SpotAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spot_add);
         //Log.i("Clicked","Finders Open");
-        city = (Spinner) findViewById(R.id.city_spinner);
+        city = findViewById(R.id.city_input);
 
-        addItemsOnSpinner2();
+        //addItemsOnSpinner2();
         addListenerOnButton();
         addListenerOnSpinnerItemSelection();
 
     }
 
     // add items into spinner dynamically
-    public void addItemsOnSpinner2() {
+   /* public void addItemsOnSpinner2() {
 
         //city = (Spinner) findViewById(R.id.city_spinner);
         ArrayList<String> list = new ArrayList<String>();
@@ -57,7 +58,7 @@ public class SpotAddActivity extends AppCompatActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         city.setAdapter(dataAdapter);
-    }
+    }*/
 
     public void addListenerOnSpinnerItemSelection() {
         state = (Spinner) findViewById(R.id.state_spinner);
@@ -89,7 +90,7 @@ public class SpotAddActivity extends AppCompatActivity {
                SpotContent.SpotItem output = new SpotContent.SpotItem(
                       name.getText().toString(),
                        String.valueOf(state.getSelectedItem()),
-                       String.valueOf(city.getSelectedItem()),
+                       city.getText().toString(),
                        description.getText().toString(),
                        directions.getText().toString(),
                        MainActivity.EMAIL
