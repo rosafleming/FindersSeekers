@@ -103,10 +103,11 @@
     <EditText
         android:id="@+id/editText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:background="#11000000"
         android:ems="10"
+        android:hint="City"
         android:inputType="textPersonName"
-        android:text="Name"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="242dp" />
 
