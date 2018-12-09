@@ -105,6 +105,28 @@ public class SignUpActivity extends AppCompatActivity {
                         topRef = FirebaseDatabase.getInstance().getReference("Users");
                         topRef.push().setValue(user);
 
+                        FirebaseStorage storage = FirebaseStorage.getInstance();
+                        StorageReference profileRef = storage.getReference();
+                        StorageReference profileImagesRef = profileRef.child("images/" + email.getText().toString()+"_profilepic.png");
+
+                        Bitmap bitmap = ((BitmapDrawable) profilePic.getDrawable()).getBitmap();
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                        byte[] byteData = baos.toByteArray();
+
+                        UploadTask uploadTask = profileImagesRef.putBytes(byteData);
+                        uploadTask.addOnFailureListener(new OnFailureListener(){
+                            @Override
+                            public void onFailure(@NonNull Exception exception){
+                                Log.d("myStorage","failure :(");
+                            }
+                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>(){
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Log.d("myStorage","Success");
+
+                            }
+                        });
 
                         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                         intent.putExtra("email", emailStr);
@@ -145,7 +167,7 @@ public class SignUpActivity extends AppCompatActivity {
             profilePic.setDrawingCacheEnabled(true);
             profilePic.buildDrawingCache();
 
-            //upload
+            /*upload
             Bitmap bitmap = ((BitmapDrawable) profilePic.getDrawable()).getBitmap();
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
@@ -183,6 +205,7 @@ public class SignUpActivity extends AppCompatActivity {
                     // Handle any errors
                 }
             });
+            */
         }
     }
 
