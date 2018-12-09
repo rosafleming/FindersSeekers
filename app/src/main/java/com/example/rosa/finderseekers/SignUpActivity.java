@@ -40,8 +40,9 @@ public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     DatabaseReference topRef;
     ImageView profilePic;
-    FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference profileRef = storage.getReference();
+
+    //FirebaseStorage storage;
+    //StorageReference profileRef;
     //StorageReference profileRef = storageRef.child("profilePic");
 
 
@@ -133,25 +134,53 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            StorageReference profileRef = storage.getReference();
+            StorageReference profileImagesRef = profileRef.child("images/profilepic.png");
+
+            //local
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             profilePic.setImageBitmap(imageBitmap);
             profilePic.setDrawingCacheEnabled(true);
             profilePic.buildDrawingCache();
+
+            //upload
             Bitmap bitmap = ((BitmapDrawable) profilePic.getDrawable()).getBitmap();
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
             byte[] byteData = baos.toByteArray();
 
-            UploadTask uploadTask = profileRef.putBytes(byteData);
+            UploadTask uploadTask = profileImagesRef.putBytes(byteData);
             uploadTask.addOnFailureListener(new OnFailureListener(){
                 @Override
                 public void onFailure(@NonNull Exception exception){
-
+                    Log.d("myStorage","failure :(");
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>(){
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Log.d("myStorage","Success");
+
+                }
+            });
+
+            //download
+            final long ONE_MEGABYTE = 1024 * 1024;
+            profileImagesRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    //byte[] bitmapdata; // let this be your byte array
+                    Bitmap downloadedBit = BitmapFactory.decodeByteArray(bytes , 0, bytes .length);
+                    profilePic.setImageBitmap(imageBitmap);
+                    profilePic.setDrawingCacheEnabled(true);
+                    profilePic.buildDrawingCache();
+                    // Data for "images/island.jpg" is returns, use this as needed
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle any errors
                 }
             });
         }
