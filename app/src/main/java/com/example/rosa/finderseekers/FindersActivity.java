@@ -26,8 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FindersActivity extends BaseActivity {
-
-
     private Button post;
 
     DatabaseReference topRef;

@@ -1,6 +1,9 @@
 package com.example.rosa.finderseekers;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,11 +12,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class SpotSelected extends AppCompatActivity {
 
@@ -42,6 +49,7 @@ public class SpotSelected extends AppCompatActivity {
         city = findViewById(R.id.spotCity);
         description = findViewById(R.id.spotDesc);
         direction = findViewById(R.id.spotDirec);
+        spotPic = findViewById(R.id.spotPic);
 
         topRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference spots = topRef.child("Spots");
@@ -60,6 +68,26 @@ public class SpotSelected extends AppCompatActivity {
                         description.setText(ds.getValue(SpotContent.SpotItem.class).getDescription());
                         direction.setText(ds.getValue(SpotContent.SpotItem.class).getDirections());
 
+                        FirebaseStorage storage = FirebaseStorage.getInstance();
+                        StorageReference profileRef = storage.getReference();
+                        StorageReference profileImagesRef = profileRef.child("locations/" + spotname.getText().toString() +"_locpic.png");
+
+
+                        final long ONE_MEGABYTE = 1024 * 1024;
+                        profileImagesRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                            @Override
+                            public void onSuccess(byte[] bytes) {
+                                //byte[] bitmapdata; // let this be your byte array
+                                Bitmap downloadedBit = BitmapFactory.decodeByteArray(bytes , 0, bytes .length);
+                                spotPic.setImageBitmap(downloadedBit);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle any errors
+                            }
+                        });
+
                     }
                 }
 
@@ -70,6 +98,8 @@ public class SpotSelected extends AppCompatActivity {
                 Log.e("FindData", "onCancelled", databaseError.toException());
             }
         });
+
+
 
     }
 }

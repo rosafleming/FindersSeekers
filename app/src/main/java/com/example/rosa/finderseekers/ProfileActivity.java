@@ -94,7 +94,6 @@ public class ProfileActivity extends BaseActivity {
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference profileRef = storage.getReference();
-
         StorageReference profileImagesRef = profileRef.child("images/" + MainActivity.EMAIL +"_profilepic.png");
 
 
