@@ -52,7 +52,7 @@ public class SpotContent {
 
         @Override
         public String toString() {
-            return "Name: " + this.name +"\n"+
+            return "Name: " + this.name +" \n"+
                     "State: " + this.state +"\n"+
                     "City: " + this.city +"\n"+
                     "Description: " + this.description +"\n"+

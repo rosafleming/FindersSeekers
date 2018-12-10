@@ -94,7 +94,7 @@ public class ProfileActivity extends BaseActivity {
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference profileRef = storage.getReference();
-        StorageReference profileImagesRef = profileRef.child("images/" + email.getText().toString()+"_profilepic.png");
+        StorageReference profileImagesRef = profileRef.child("images/" + MainActivity.EMAIL+"_profilepic.png");
 
         final long ONE_MEGABYTE = 1024 * 1024;
         profileImagesRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {

@@ -73,21 +73,22 @@ public class SeekersActivity extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    if(ds.getValue(ProfileContent.ContentItem.class).equals(MainActivity.EMAIL)) {
+                        if ((Integer.parseInt(ds.getValue(ProfileContent.ContentItem.class).getSeekersNum()) - Integer.parseInt(ds.getValue(ProfileContent.ContentItem.class).getFindersNum())) > 5) {
+                            AlertDialog alertDialog = new AlertDialog.Builder(SeekersActivity.this).create();
+                            alertDialog.setTitle("Alert");
+                            alertDialog.setMessage("Please Add More Spots Before Seeking.");
+                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                            Intent intent = new Intent(SeekersActivity.this, FindersActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    });
+                            alertDialog.show();
 
-                    if((Integer.parseInt(ds.getValue(ProfileContent.ContentItem.class).getSeekersNum()) - Integer.parseInt(ds.getValue(ProfileContent.ContentItem.class).getFindersNum())) > 5) {
-                        AlertDialog alertDialog = new AlertDialog.Builder(SeekersActivity.this).create();
-                        alertDialog.setTitle("Alert");
-                        alertDialog.setMessage("Please Add More Spots Before Seeking.");
-                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                        Intent intent = new Intent(SeekersActivity.this, FindersActivity.class);
-                                        startActivity (intent);
-                                    }
-                                });
-                        alertDialog.show();
-
+                        }
                     }
                 }
 
@@ -138,6 +139,10 @@ public class SeekersActivity extends BaseActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String title =  (String)parent.getItemAtPosition(position);
+                String delims = "[ ]+";
+                String result[] = title.split(delims);
+
                 users = topRef.child("Users");
                 users.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -159,7 +164,20 @@ public class SeekersActivity extends BaseActivity {
                     }
                 });
 
+
+                String spotTitle="";
+
+                for(int i = 1; i < result.length; i++){
+                    if(result[i].equals("\nState:")){
+                        break;
+                    }
+                    Log.i("SEEKSPOT", result[i]);
+                    spotTitle = spotTitle + " " + result[i];
+                }
+
+                Log.i("SEEKSPOT",spotTitle );
                 Intent intent = new Intent(SeekersActivity.this, SpotSelected.class);
+                intent.putExtra("selectedTitle", spotTitle);
                 startActivity (intent);
             }
         });
