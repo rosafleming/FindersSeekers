@@ -46,12 +46,13 @@ public class SpotSelected extends AppCompatActivity {
         topRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference spots = topRef.child("Spots");
 
+        Log.i("SEEKCLICKED", selectedTitle);
         spots.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    if(ds.getValue(SpotContent.SpotItem.class).equals(selectedTitle)) {
+                    if((" "+ds.getValue(SpotContent.SpotItem.class).getName()).equals(selectedTitle)) {
                         spotname.setText(ds.getValue(SpotContent.SpotItem.class).getName());
                         username.setText(ds.getValue(SpotContent.SpotItem.class).getUsername());
                         state.setText(ds.getValue(SpotContent.SpotItem.class).getState());
