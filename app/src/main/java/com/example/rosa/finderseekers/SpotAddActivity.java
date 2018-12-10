@@ -128,7 +128,7 @@ public class SpotAddActivity extends AppCompatActivity {
 
                 FirebaseStorage storage = FirebaseStorage.getInstance();
                 StorageReference profileRef = storage.getReference();
-                StorageReference profileImagesRef = profileRef.child("locations/" + MainActivity.EMAIL +"_locpic.png");
+                StorageReference profileImagesRef = profileRef.child("locations/" + name.getText().toString() +"_locpic.png");
 
                 Bitmap bitmap = ((BitmapDrawable) locPic.getDrawable()).getBitmap();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
