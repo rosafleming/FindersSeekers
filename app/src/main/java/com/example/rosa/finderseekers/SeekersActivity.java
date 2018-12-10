@@ -71,10 +71,11 @@ public class SeekersActivity extends BaseActivity {
         users.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                Log.i("SEEKKILL", "Made It");
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    if(ds.getValue(ProfileContent.ContentItem.class).equals(MainActivity.EMAIL)) {
+                    if(ds.getValue(ProfileContent.ContentItem.class).getEmail().equals(MainActivity.EMAIL)) {
                         if ((Integer.parseInt(ds.getValue(ProfileContent.ContentItem.class).getSeekersNum()) - Integer.parseInt(ds.getValue(ProfileContent.ContentItem.class).getFindersNum())) > 5) {
+                            Log.i("SEEKKILL", "Made It2");
                             AlertDialog alertDialog = new AlertDialog.Builder(SeekersActivity.this).create();
                             alertDialog.setTitle("Alert");
                             alertDialog.setMessage("Please Add More Spots Before Seeking.");
@@ -89,6 +90,7 @@ public class SeekersActivity extends BaseActivity {
                             alertDialog.show();
 
                         }
+                        Log.i("SEEKKILL", "Made It1");
                     }
                 }
 
