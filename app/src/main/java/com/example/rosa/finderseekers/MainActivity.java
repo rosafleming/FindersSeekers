@@ -16,6 +16,8 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
@@ -23,6 +25,8 @@ import com.facebook.login.widget.LoginButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.json.JSONObject;
 
 
 //https://developers.facebook.com/apps/347284212501597/fb-login/quickstart/
@@ -148,6 +152,21 @@ public class MainActivity extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                /*
+                GraphRequest request = GraphRequest.newMeRequest((
+                    loginResult.getAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback(){
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response){
+                                Log.v("LoginActivity", response.toString());
+
+                                //String email = object.getString("email");
+                                //String name = object.getString("name");
+                            }
+                        });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields","id,name,email");
+                */
                 Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                 intent.putExtra("email",EMAIL);
                 startActivity (intent);
