@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -31,6 +32,7 @@ public class FindersActivity extends BaseActivity {
     DatabaseReference topRef;
     DatabaseReference spots;
     DatabaseReference users;
+    ListView listView;
 
     @Override
     int getContentViewId() {
@@ -49,6 +51,7 @@ public class FindersActivity extends BaseActivity {
 
 
         addListenerOnButton();
+        listView = (ListView) findViewById(R.id.spot_list);
 
         topRef = FirebaseDatabase.getInstance().getReference();
         spots = topRef.child("Spots");
@@ -83,8 +86,6 @@ public class FindersActivity extends BaseActivity {
                 ArrayAdapter<String> itemsAdapter =
                         new ArrayAdapter<String>(FindersActivity.this, android.R.layout.simple_list_item_1,SpotList );
 
-
-                ListView listView = (ListView) findViewById(R.id.spot_list);
                 listView.setAdapter(itemsAdapter);
 
             }
@@ -94,18 +95,30 @@ public class FindersActivity extends BaseActivity {
             }
         });
 
-        /*String[] SpotList = new String[SpotContent.ITEMS.size()];
-
-        for (int i = 0; i < SpotContent.ITEMS.size(); i++){
-            SpotList[i] = SpotContent.ITEMS.get(i).toString();
-        }
-
-        ArrayAdapter<String> itemsAdapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,SpotList );
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String title =  (String)parent.getItemAtPosition(position);
+                String delims = "[ ]+";
+                String result[] = title.split(delims);
 
 
-        ListView listView = (ListView) findViewById(R.id.spot_list);
-        listView.setAdapter(itemsAdapter);*/
+                String spotTitle="";
+
+                for(int i = 1; i < result.length; i++){
+                    if(result[i].equals("\nState:")){
+                        break;
+                    }
+                    Log.i("SEEKSPOT", result[i]);
+                    spotTitle = spotTitle + " " + result[i];
+                }
+
+                Log.i("SEEKSPOT",spotTitle );
+                Intent intent = new Intent(FindersActivity.this, SpotSelected.class);
+                intent.putExtra("selectedTitle", spotTitle);
+                startActivity (intent);
+            }
+        });
 
     }
 
