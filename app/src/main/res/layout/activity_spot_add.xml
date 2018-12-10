@@ -8,13 +8,11 @@
 
     <Button
         android:id="@+id/post_button"
-        android:layout_width="wrap_content"
+        android:layout_width="368dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:text="Post"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
@@ -47,7 +45,7 @@
     <EditText
         android:id="@+id/description_text"
         android:layout_width="0dp"
-        android:layout_height="110dp"
+        android:layout_height="74dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
@@ -61,22 +59,23 @@
     <EditText
         android:id="@+id/direction_text"
         android:layout_width="0dp"
-        android:layout_height="110dp"
+        android:layout_height="44dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="Directions"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/post_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description_text" />
+        app:layout_constraintTop_toBottomOf="@+id/description_text"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/locPic"
         android:layout_width="0dp"
-        android:layout_height="189dp"
+        android:layout_height="131dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
