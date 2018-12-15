@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
     android:fitsSystemWindows="true"
-    tools:context="com.example.rosa.finderseekers.SignUpActivity">
+    tools:context="com.gonzalez.fs.finderseekers.SignUpActivity">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

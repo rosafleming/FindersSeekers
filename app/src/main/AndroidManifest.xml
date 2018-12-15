@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.rosa.finderseekers">
+    package="com.gonzalez.fs.finderseekers">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.gonzalez.fs.finderseekers.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,13 +40,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".SeekersActivity" />
-        <activity android:name=".FindersActivity" />
-        <activity android:name=".ProfileActivity"/>
-        <activity android:name=".SpotSelected"/>
-        <activity android:name=".SpotAddActivity"></activity>
+        <activity android:name="com.gonzalez.fs.finderseekers.SignUpActivity" />
+        <activity android:name="com.gonzalez.fs.finderseekers.HomeActivity" />
+        <activity android:name="com.gonzalez.fs.finderseekers.SeekersActivity" />
+        <activity android:name="com.gonzalez.fs.finderseekers.FindersActivity" />
+        <activity android:name="com.gonzalez.fs.finderseekers.ProfileActivity"/>
+        <activity android:name="com.gonzalez.fs.finderseekers.SpotSelected"/>
+        <activity android:name="com.gonzalez.fs.finderseekers.SpotAddActivity"></activity>
 
 
     </application>
